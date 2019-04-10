@@ -3,6 +3,7 @@ using namespace std;
 struct process{
 	int at,bt,pr,pno,wt;
 };
+
 int main(){
 	int n;
 	cout<<"Enter the no of processes"<<":";
@@ -28,7 +29,36 @@ int main(){
 		cout<<""<<endl<<"**************************************"<<endl;
 		_exit(0);
 	}
-}   
+	
+}    
+     	for(int i=1;i<=n;i++){
+	int local=i;
+	for(int k=i+1;k<=n;k++){
+	if(pro[k].at<pro[local].at){
+		local=k;
+	}
+	}	
+	int temp;
+		temp=pro[i].pr;
+		pro[i].pr=pro[local].pr;
+		pro[local].pr=pro[i].pr;
+		
+		temp=pro[i].at;
+		pro[i].at=pro[local].at;
+		pro[local].at=pro[i].at;
+		
+		temp=pro[i].bt;
+		pro[i].bt=pro[local].bt;
+		pro[local].bt=pro[i].bt;
+		
+		temp=pro[i].wt;
+		pro[i].wt=pro[local].wt;
+		pro[local].wt=pro[i].wt;
+		
+	
+	
+	}   
+
 for(int k=1;k<=n;k++){
 	cout<<"Enter the burst time of the process"<<"P"<<k<<":";
 	cin>>bur[k];
@@ -50,24 +80,43 @@ for(int k=1;k<=n;k++){
     for(int k=1;k<=n;k++){
     sum+=pro[k].bt;
     }
-    cout<<"gantt chart"<<endl;
-    cout<<"processes are in this order"<<"P:"<<endl;
 	for(int k=1;k<sum;k++){
 		for(int i=1;i<=n;i++){
 			if(pro[i].at<k){
 				pro[i].wt=k-pro[i].at;
-			    pro[i].pr=1+(pro[i].wt/pro[i].bt);
+			    
 			}
-    }
-    int max=pro[1].pr;
-    for(int i=1;i<=n;i++){
-    	if(pro[i].pr<max){
-    		max=pro[i].pr;
-    		cout<<"P:"<<i<<endl;	
-		}	
-		
+		}
+		for(int k=1;k<=n;k++){
+		pro[k].pr=(1+(pro[k].wt/pro[k].bt));
 	}
-	
+    
+}
+
+
+	for(int i=1;i<=n;i++){
+	int local=i;
+	for(int k=1+i;k<=n;k++){
+	if(pro[k].pr>pro[local].pr){
+		local=k;
+	}
+	}	
+     int temp;
+		temp=pro[i].pr;
+		pro[i].pr=pro[local].pr;
+		pro[local].pr=pro[i].pr;
+		
+		temp=pro[i].at;
+		pro[i].at=pro[local].at;
+		pro[local].at=pro[i].at;
+		
+		temp=pro[i].bt;
+		pro[i].bt=pro[local].bt;
+		pro[local].bt=pro[i].bt;
+		
+		temp=pro[i].wt;
+		pro[i].wt=pro[local].wt;
+		pro[local].wt=pro[i].wt;
 	}
 	int avg_wt;
 	for(int i=1;i<=n;i++){
@@ -78,14 +127,14 @@ for(int k=1;k<=n;k++){
 		cout<<endl<<"Average waiting time of the processes is:"<<avg_wt/n<<endl;
 	}
 	else{
-	cout<<"Average waiting time of the processes is:"<<-avg_wt/n<<endl;
+	cout<<"Average waiting time of the processes is:"<<(-avg_wt)/n<<endl;
 }
     int avg_tat;
     if(avg_wt>0){
 		cout<<"Average turn arround time of the processes is:"<<avg_wt+sum/n<<endl;
 	}
 	else{
-	cout<<"Average turn arround time of the processes is:"<<-avg_wt+sum/n<<endl;
+	cout<<"Average turn arround time of the processes is:"<<(-avg_wt)+sum/n<<endl;
 }
     
-}
+}   

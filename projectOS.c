@@ -82,7 +82,7 @@ for(int k=1;k<=n;k++){
     }
 	for(int k=1;k<sum;k++){
 		for(int i=1;i<=n;i++){
-			if(pro[i].at<k){
+			if(pro[i].at<=k){
 				pro[i].wt=k-pro[i].at;
 			    
 			}
@@ -118,23 +118,24 @@ for(int k=1;k<=n;k++){
 		pro[i].wt=pro[local].wt;
 		pro[local].wt=pro[i].wt;
 	}
+	int avg_tat=pro[1].pr;
 	int avg_wt;
 	for(int i=1;i<=n;i++){
 		
 	avg_wt=pro[i].wt+pro[i+1].wt;
 	}
 	if(avg_wt>0){
-		cout<<endl<<"Average waiting time of the processes is:"<<avg_wt/n<<endl;
+		cout<<endl<<"Average waiting time of the processes is:"<avg_wt/n<<endl;
 	}
 	else{
 	cout<<"Average waiting time of the processes is:"<<(-avg_wt)/n<<endl;
 }
-    int avg_tat;
+    
     if(avg_wt>0){
-		cout<<"Average turn arround time of the processes is:"<<avg_wt+sum/n<<endl;
+		cout<<"Average turn arround time of the processes is:"<<avg_tat<<endl;
 	}
 	else{
-	cout<<"Average turn arround time of the processes is:"<<(-avg_wt)+sum/n<<endl;
+	cout<<"Average turn arround time of the processes is:"<<avg_tat<<endl;
 }
     
 }   
